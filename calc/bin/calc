@@ -1,8 +1,13 @@
 #!/usr/bin/node
 
 const calc = require('../lib/');
-const args = process.argv.slice(2);
+const argv = process.argv.slice(2);
+const argsParser = require('../lib/args');
 
-const cmd = args.shift();
-const result = calc[cmd](args);
+const cmd = argv.shift();
+
+const args = argsParser(argv);
+
+const result = calc(cmd, args);
+
 console.log('calculated', { cmd, args, result });
