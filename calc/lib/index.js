@@ -1,10 +1,13 @@
 const debug = require('debug')('calc');
 
-debug('calc is loading');
-
+debug('calc is loading', process.argv);
+//
 const cmds = {
   add: require('./operators/add'),
   sub: require('./operators/sub'),
+  div: require('./operators/div'),
+  mul: require('./operators/mul'),
+  help: require('./operators/help'),
 }
 
 const calc = (cmd, operands) => {

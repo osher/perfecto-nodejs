@@ -1,10 +1,16 @@
 #!/usr/bin/node
 
+/*
+ This module is the adapter layer between the CLI context and the logic layer from lib
+
+ :) 
+*/
+
 const calc = require('../lib');
-const argv = process.argv.slice(2);
+
+const [,, cmd, ...argv]  = process.argv
 const argsParser = require('../lib/args');
 
-const cmd = argv.shift();
 
 let args;
 try {
