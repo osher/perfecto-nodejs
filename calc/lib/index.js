@@ -7,9 +7,13 @@ const cmds = {
   sub: require('./operators/sub'),
 }
 
-module.exports = (cmd, operands) => {
-  if (!cmds[cmd]) throw new Error('Unsupported command: ' + cmd);
+const calc = (cmd, operands) => {
+  const command = cmds[cmd];
+  if (!command) throw new Error('Unsupported command: ' + cmd);
 
-
-
+  return command(...operands)
 };
+calc.cmds = cmds;
+
+
+module.exports = calc

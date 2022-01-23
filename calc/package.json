@@ -2,12 +2,12 @@
   "name": "calc",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib"
   },
   "bin": {
-    "calc": "bin/calc"
+    "calc": "bin/calc.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
