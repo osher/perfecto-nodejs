@@ -11,6 +11,8 @@ const calc = (cmd, operands) => {
   const command = cmds[cmd];
   if (!command) throw new Error('Unsupported command: ' + cmd);
 
+  debug('will run command', { cmd, operands});
+
   return command(...operands)
 };
 calc.cmds = cmds;
