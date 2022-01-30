@@ -1,20 +1,70 @@
-const args = require('../lib/args')({ process })
+const args = require('../lib/args')({ process });
 
+if (args.error) {
+  console.error(args.error);
+  process.exit(1);
+}
 
-const starwars = require('../lib/starwars-dal')({ baseUrl: 'https://swapi.dev/api'});
-const { getJson } = starwars;
+if (!args.id) {
+  console.error('must provide id of the person');
+  process.exit(1);
+}
+
+const starwars = require('../lib/starwars-dal')(args.starwars);
+const { getJson, people } = starwars;
 
 (async () => {
-  const person = await starwars.people.byId(1);
+  //input check
+  if (!args.id) {
+    console.error('must provide id of the person');
+    process.exit(1);
+  }
 
-  const { vehicles } = person;
+  //fetch
+  const person = await people.byId(args.id);
 
-  const vehiclesData = await Promise.all( vehicles.map(getJson));
+  const { films, vehicles, starships } = person;
 
-  const vehicleLines = vehiclesData.map(({name, model}) => `${name} is a ${model}`);
+  const [
+    filmsData,
+    vehiclesData, 
+    starshipsData,
+  ] = await Promise.all([
+    Promise.all( films.map(getJson)),
+    Promise.all( vehicles.map(getJson)),
+    Promise.all( starships.map(getJson)),
+  ]);
 
-  console.log(`${person.name} rode: \n - ${vehicleLines.join('\n - ')}`);
+  //format
+
+  const filmsLines = filmsData.map(({title, release_date}) => `${title}, from ${release_date}`);
+  const vehicleLines = vehiclesData.map(({name, model}) => `${name},  a ${model}`);
+  const starshipsLines = starshipsData.map(({name, model}) => `${name}, a ${model}`);
+  console.log(
+    [
+      person.name,
+      '',
+      'appears: ' + listFormat(filmsLines),
+      '',
+      'rode: ' + listFormat(vehicleLines),
+      '',
+      'piloted: ' + listFormat(starshipsLines),
+    ].join('\n')
+  )
+
+  function list(arr, mapper) {
+    return listFormat(arr.map(mapper))
+  }
+
+  function listFormat(list) {
+    list = ["", ...list];
+    return list.length > 1
+      ? list.join('\n - ')
+      : 'nothing'
+  }
 })();
+
+
 
 
 
