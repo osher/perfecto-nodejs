@@ -1,4 +1,5 @@
 const { assign } = Object;
+const fs = require('fs');
 const pino = require('pino');
 module.exports = ({
   logger: {

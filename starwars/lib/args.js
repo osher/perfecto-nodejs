@@ -8,7 +8,12 @@ module.exports = ({
   },
 }) => {
   const args = argv.slice(2);
-  const switches = minimist(args, {});
+  const switches = minimist(args, {
+    boolean: ['logger.prettyPrint'],
+    default: {
+      'logger.prettyPrint': config.logger.prettyPrint,
+    }
+  });
   const { name, version } = require('../package');
 
   const error = 

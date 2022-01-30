@@ -1,5 +1,8 @@
 const args = require('../lib/args')({ process });
-//TBD: init logger
+const logger = require('../lib/logger')(args);
+
+logger.trace({args}, "initiated with args");
+
 if (args.error) {
   console.error(args.error);
   process.exit(1);
@@ -12,6 +15,7 @@ if (!args.id) {
 
 const personProfile = require('../lib/jobs/person-profile');
 
+logger.info({id: args.id, output: args.output }, "processing person profile");
 
 (async () => {
 /*
