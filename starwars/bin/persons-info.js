@@ -30,7 +30,7 @@ logger.info({id: args.id, output: args.output }, "processing person profile");
 */
 
   try {
-    const view = await personProfile({ args});
+    const view = await personProfile({ args, logger });
 
   } catch(err) {
     console.error("unexpected error", {
