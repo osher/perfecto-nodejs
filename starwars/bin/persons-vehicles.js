@@ -35,25 +35,18 @@ const { getJson, people } = starwars;
     Promise.all( starships.map(getJson)),
   ]);
 
-  //format
-
-  const filmsLines = filmsData.map(({title, release_date}) => `${title}, from ${release_date}`);
-  const vehicleLines = vehiclesData.map(({name, model}) => `${name},  a ${model}`);
-  const starshipsLines = starshipsData.map(({name, model}) => `${name}, a ${model}`);
+  //view
   console.log(
     [
       person.name,
-      '',
-      'appears: ' + listFormat(filmsLines),
-      '',
-      'rode: ' + listFormat(vehicleLines),
-      '',
-      'piloted: ' + listFormat(starshipsLines),
+      list('appears', filmsData, ({title, release_date}) => `${title}, from ${release_date}`),
+      list('rode vehicles', vehiclesData, ({name, model}) => `${name},  a ${model}`),
+      list('piloted ships', starshipsData, ({name, model}) => `${name}, a ${model}`),
     ].join('\n')
   )
 
-  function list(arr, mapper) {
-    return listFormat(arr.map(mapper))
+  function list(title, arr, mapper) {
+    return `\n${title}: ${listFormat(arr.map(mapper))}`
   }
 
   function listFormat(list) {
