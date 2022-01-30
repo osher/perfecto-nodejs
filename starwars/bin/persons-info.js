@@ -27,7 +27,7 @@ const personProfile = require('../lib/jobs/person-profile');
 
   try {
     const view = await personProfile({ args});
-    console.log(view);
+
   } catch(err) {
     console.error("unexpected error", {
       message: err.message,
