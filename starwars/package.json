@@ -1,5 +1,5 @@
 {
-  "name": "tmp",
+  "name": "starwars",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "calc": "file:../calc"
+    "config": "^3.3.7",
+    "got": "^12.0.1",
+    "js-yaml": "^4.1.0",
+    "lodash.merge": "^4.6.2",
+    "minimist": "^1.2.5",
+    "request": "^2.88.2"
   }
 }

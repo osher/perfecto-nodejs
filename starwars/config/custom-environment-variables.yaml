@@ -1,0 +1,6 @@
+starwars:
+  baseUrl: STARWARS_BASE_URL
+
+logger:
+  levels: 
+    default: LOGGER_DEFAULT_LEVEL
