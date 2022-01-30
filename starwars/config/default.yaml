@@ -12,5 +12,5 @@ logger:
   prettyPrint: false
   prettyOptions:
     colorize: true
-
+    ignore: 'pid,hostname,pkg'
 

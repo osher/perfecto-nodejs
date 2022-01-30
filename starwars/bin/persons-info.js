@@ -31,9 +31,9 @@ logger.info({id: args.id, output: args.output }, "processing person profile");
 
   try {
     const view = await personProfile({ args, logger });
-
+    logger.info({ view: view.slice(0, 50) + "..." }, "saved");
   } catch(err) {
-    console.error("unexpected error", {
+    logger.error("unexpected error", {
       message: err.message,
       stack: err.stack.split('\n'),
     })
