@@ -1,8 +1,9 @@
 module.exports = ({
   dal: { people, getJson },
 }) => {
+  //person is a function factory, getPersonById creates a new person
   return {
-    getById: async (id) => {
+    getPersonById: async (id) => {
       //input check
       if (!id || typeof id != 'number') {
           throw new Error('must provide numeric id of the person');
