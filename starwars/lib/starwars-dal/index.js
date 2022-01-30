@@ -9,6 +9,7 @@ function, var => function scope, hoisted
 module.exports = ({baseUrl}) => {
 
 	return {
+    getJson,
 		people: {
 			byId: byIdFetcher('people'),
 		},
