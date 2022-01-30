@@ -1,11 +1,11 @@
 module.exports = async ({ args/*, logger */}) => {
   const dal = require('../starwars-dal')(args.starwars);
   const personModel = require('../model/person')({dal})
-  const { person, films, vehicles, starships } = await personModel.byId(args.id);
+  const { person, homeworld, films, vehicles, starships } = await personModel.byId(args.id);
 
   //view
   return [
-    person.name,
+    `${person.name} is from ${homeworld.name}`,
     list('appears', films, ({title, release_date}) => `${title}, from ${release_date}`),
     list('rode vehicles', vehicles, ({name, model}) => `${name},  a ${model}`),
     list('piloted ships', starships, ({name, model}) => `${name}, a ${model}`),
