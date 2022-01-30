@@ -15,7 +15,7 @@ const writeFile = (...a) => new Promise(({accept, reject}) => {
 module.exports = async ({ args/*, logger */}) => {
   const dal = require('../starwars-dal')(args.starwars);
   const personModel = require('../model/person')({dal})
-  //we created the function getById and excuted it here, using the message factory
+  //we created the function getById and excuted it here, using the function factory in person.js
   const { person, homeworld, films, vehicles, starships } = await personModel.getById(args.id);
 
 
