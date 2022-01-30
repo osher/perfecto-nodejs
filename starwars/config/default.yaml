@@ -1,0 +1,6 @@
+starwars:
+  baseUrl: 'https://swapi.dev/api'
+
+logger:
+  levels: 
+    default: info
