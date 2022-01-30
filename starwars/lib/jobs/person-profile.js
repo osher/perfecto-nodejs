@@ -1,15 +1,33 @@
+
+const fs = require('fs');
+const { promisify } = require('util');
+const writeFile = promisify(fs.writeFile);
+
+/*
+//simpleton manual promisify implementation:
+const writeFile = (...a) => new Promise(({accept, reject}) => {
+  fs.writeFile(...a, (err, data) => {
+    err ? reject(err) : accept(data)
+  })
+})
+*/
+
 module.exports = async ({ args/*, logger */}) => {
   const dal = require('../starwars-dal')(args.starwars);
   const personModel = require('../model/person')({dal})
-  const { person, films, vehicles, starships } = await personModel.byId(args.id);
+  const { person, homeworld, films, vehicles, starships } = await personModel.byId(args.id);
 
-  //view
-  return [
-    person.name,
+
+  const view = [
+    `${person.name} is from ${homeworld.name}`,
     list('appears', films, ({title, release_date}) => `${title}, from ${release_date}`),
     list('rode vehicles', vehicles, ({name, model}) => `${name},  a ${model}`),
     list('piloted ships', starships, ({name, model}) => `${name}, a ${model}`),
   ].join('\n');
+
+  await writeFile(args.output.file, view);
+
+  return view;
 
   function list(title, arr, mapper) {
     return `\n${title}: ${listFormat(arr.map(mapper))}`;

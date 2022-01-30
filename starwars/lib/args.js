@@ -8,10 +8,16 @@ module.exports = ({
   },
 }) => {
   const args = argv.slice(2);
-  const switches = minimist(args, {});
+  const switches = minimist(args, {
+    boolean: ['logger.prettyPrint'],
+    default: {
+      'logger.prettyPrint': config.logger.prettyPrint,
+    }
+  });
+  const { name, version } = require('../package');
 
   const error = 
     switches.id && 'number' != typeof switches.id && '--id must parse into a number';
 
-  return merge(config, switches, { error });
+  return merge(config, switches, { package: { name, version }, error });
 };

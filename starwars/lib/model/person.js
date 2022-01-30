@@ -11,13 +11,15 @@ module.exports = ({
       //fetch
       const person = await people.byId(id);
       
-      const { films, vehicles, starships } = person;
-      
+      const { homeworld, films, vehicles, starships } = person;
+
       const [
-          filmsData,
-          vehiclesData, 
-          starshipsData,
+        homeworldData,
+        filmsData,
+        vehiclesData, 
+        starshipsData,
       ] = await Promise.all([
+          getJson(homeworld),
           Promise.all( films.map(getJson)),
           Promise.all( vehicles.map(getJson)),
           Promise.all( starships.map(getJson)),
@@ -25,6 +27,7 @@ module.exports = ({
       
       return {
           person,
+          homeworld: homeworldData,
           films: filmsData,
           vehicles: vehiclesData,
           starships: starshipsData,

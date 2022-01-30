@@ -1,6 +1,16 @@
 starwars:
   baseUrl: 'https://swapi.dev/api'
 
+output:
+  file: tmp.txt
+
 logger:
   levels: 
     default: info
+    model: warn
+    dal: warn
+  prettyPrint: false
+  prettyOptions:
+    colorize: true
+    ignore: 'pid,hostname,pkg'
+
