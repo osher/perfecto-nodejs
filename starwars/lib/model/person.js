@@ -2,7 +2,7 @@ module.exports = ({
   dal: { people, getJson },
 }) => {
   return {
-    byId: async (id) => {
+    getById: async (id) => {
       //input check
       if (!id || typeof id != 'number') {
           throw new Error('must provide numeric id of the person');

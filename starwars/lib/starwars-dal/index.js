@@ -17,7 +17,6 @@ module.exports = ({baseUrl}) => {
 			byId: byIdFetcher('vehicles'),
 		},
 		planet: {
-			list: () => 1,
 			byId: byIdFetcher('planets'),
 		}
 	};
