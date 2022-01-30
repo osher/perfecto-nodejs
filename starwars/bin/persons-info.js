@@ -2,7 +2,6 @@ const args = require('../lib/args')({ process });
 const logger = require('../lib/logger')(args);
 
 logger.trace({args}, "initiated with args");
-
 if (args.error) {
   console.error(args.error);
   process.exit(1);

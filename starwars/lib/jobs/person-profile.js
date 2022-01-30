@@ -3,20 +3,10 @@ const fs = require('fs');
 const { promisify } = require('util');
 const writeFile = promisify(fs.writeFile);
 
-/*
-//simpleton manual promisify implementation:
-const writeFile = (...a) => new Promise(({accept, reject}) => {
-  fs.writeFile(...a, (err, data) => {
-    err ? reject(err) : accept(data)
-  })
-})
-*/
-
 module.exports = async ({ args/*, logger */}) => {
   const dal = require('../starwars-dal')(args.starwars);
   const personModel = require('../model/person')({dal})
-  //we created the function getById and excuted it here, using the function factory in person.js
-  const { person, homeworld, films, vehicles, starships } = await personModel.getById(args.id);
+  const { person, homeworld, films, vehicles, starships } = await personModel.getPersonById(args.id);
 
 
   const view = [
