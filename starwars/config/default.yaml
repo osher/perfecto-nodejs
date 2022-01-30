@@ -9,7 +9,7 @@ logger:
     default: info
     model: warn
     dal: warn
-  prettyPrint: true
+  prettyPrint: false
   prettyOptions:
     colorize: true
 
